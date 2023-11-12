@@ -1,7 +1,7 @@
 # Catch Them Strawberry!
-https://github.com/kiaramontinola/final-project
-## Repository
 
+## Repository
+https://github.com/kiaramontinola/final-project
 
 ## Description
 My final project is an interactive game where the user moves arrow keys to drag a basket across to catch the falling objects. This game would generate strawberries
