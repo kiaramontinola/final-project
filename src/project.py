@@ -11,6 +11,12 @@ FPS = 60
 PINK = (255, 105, 180)
 WHITE = (255, 255, 255)
 
+# Initialize Pygame mixer
+pygame.mixer.init()
+
+# Load sounds
+catch_sound = pygame.mixer.Sound("sounds/catch.wav")
+
 # Load images
 background_image = pygame.image.load("images/background.jpg")
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
@@ -24,7 +30,7 @@ strawberry_image = pygame.transform.scale(strawberry_image, (50, 50))
 
 # Create the screen
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Catch the Falling Strawberries")
+pygame.display.set_caption("Catch Them Strawberry!")
 
 # Create the basket
 basket_width, basket_height = basket_image.get_size()
@@ -81,9 +87,53 @@ def check_collision(basket_x, basket_y, strawberries):
             basket_x < strawberry['x'] < basket_x + basket_width
             and basket_y < strawberry['y'] < basket_y + basket_height
         ):
+            # Play catch sound when a strawberry is caught
+            catch_sound.play()
+
             strawberry['y'] = -strawberry_height
             strawberry['x'] = random.randint(0, WIDTH - strawberry_width)
             score += 1
+def intro_screen():
+    intro = True
+
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse = pygame.mouse.get_pos()
+                # Check for "Play Game" button click
+                if WIDTH // 2 - 75 < mouse[0] < WIDTH // 2 + 75 and HEIGHT // 2 - 25 < mouse[1] < HEIGHT // 2 + 25:
+                    intro = False
+                # Check for "Exit Game" button click
+                elif WIDTH - 100 < mouse[0] < WIDTH - 20 and 20 < mouse[1] < 60:
+                    pygame.quit()
+                    sys.exit()
+
+        screen.blit(background_image, (0, 0))
+        
+        # "Play Game" button
+        play_button_rect = pygame.draw.rect(screen, PINK, (WIDTH // 2 - 75, HEIGHT // 2 - 25, 200, 50))
+        play_button_text = font.render("Play Game", True, WHITE)
+        
+        screen.blit(play_button_text, (WIDTH // 2 - 35, HEIGHT // 2 - 15))
+        
+
+        pygame.display.flip()
+
+def draw_exit_button():
+    button_width = 120  # Adjust the width as needed
+    button_height = 40
+    button_x = WIDTH - button_width - 20
+    button_y = 20
+
+    exit_button_rect = pygame.draw.rect(screen, PINK, (button_x, button_y, button_width, button_height))
+    exit_button_text = font.render("Exit Game", True, WHITE)
+    text_rect = exit_button_text.get_rect(center=(button_x + button_width / 2, button_y + button_height / 2))
+    
+    screen.blit(exit_button_text, text_rect)
+    return exit_button_rect
 
 def game_loop():
     global basket_x, score
@@ -119,8 +169,18 @@ def game_loop():
             draw_strawberry(strawberry['x'], strawberry['y'])
         draw_score()
 
+        # Draw "Exit Game" button
+        exit_button_rect = draw_exit_button()
+
+        # Check for mouse click on "Exit Game" button
+        mouse = pygame.mouse.get_pos()
+        if exit_button_rect.collidepoint(mouse):
+            pygame.quit()
+            sys.exit()
+
         pygame.display.flip()
         clock.tick(FPS)
 
 if __name__ == "__main__":
+    intro_screen()
     game_loop()
