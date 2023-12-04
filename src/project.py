@@ -14,7 +14,7 @@ WHITE = (255, 255, 255)
 # Initialize Pygame mixer
 pygame.mixer.init()
 
-# Load sounds
+# Load sound
 catch_sound = pygame.mixer.Sound("sounds/catch.wav")
 
 # Load images
