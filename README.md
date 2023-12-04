@@ -4,7 +4,7 @@
 Demo Video: <URL>
 
 ## GitHub Repository
-GitHub Repo: <URL>
+GitHub Repo: [ <URL>](https://github.com/kiaramontinola/final-project/tree/main)
 
 ## Description
 This game is a tribute to one of my favorite shows, Strawberry Shortcake. The player in this case, is Strawberry Shortcake herself- hence, the name of the game. The objective is to catch as many falling strawberries in the basket as possible.
