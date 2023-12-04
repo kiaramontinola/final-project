@@ -1,7 +1,7 @@
 # CATCH THEM, STRAWBERRY! GAME
 
 ## Demo
-Demo Video: <URL>
+Demo Video: https://youtu.be/TtNfWpfdtNQ
 
 ## GitHub Repository
 GitHub Repo: https://github.com/kiaramontinola/final-project/tree/main)](https://github.com/kiaramontinola/final-project/tree/main
