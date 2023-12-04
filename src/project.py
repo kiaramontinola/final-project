@@ -46,8 +46,7 @@ strawberry_speed = 5
 
 # Initialize score and difficulty
 score = 0
-difficulty = 0  # Controls the difficulty level
-
+difficulty = 0  
 font = pygame.font.Font(None, 36)
 
 def draw_background():
@@ -123,7 +122,7 @@ def intro_screen():
         pygame.display.flip()
 
 def draw_exit_button():
-    button_width = 120  # Adjust the width as needed
+    button_width = 120 
     button_height = 40
     button_x = WIDTH - button_width - 20
     button_y = 20
